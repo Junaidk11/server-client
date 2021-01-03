@@ -27,15 +27,14 @@ int main(){
 	   server. 
         */
 	struct sockaddr_in serverAddr;
-	
-	
+
 	// Create a socket and assign it to the server place holder
 	/* The first parameter is the Address Family corresponding to IPv4 and the second parameter indicates that you're creating a Stream socket type, which is a reliable socket type, and the Communication protocol to be used by this socket will be TCP, which is indicated by the 0 in the third parameter */
-	server = socket(AF_NET, SOCKET_STREAM,0);  
+	server = socket(AF_INET, SOCK_STREAM,0);  
 
 	// Fill out the server socket configurations i.e. the Port number the socket will be bind to  and the connection interface the socket will connect to, and the Address Family assigned to the socket. 
 	
-	serverAdddr.sin_addr.s_addr = INADDR_ANY;  // the server socket can listen to connections over LAN, WIFI or any other. 
+	serverAddr.sin_addr.s_addr = INADDR_ANY;  // the server socket can listen to connections over LAN, WIFI or any other. 
 	serverAddr.sin_family = AF_INET;  // Server socket is assigned IPV4 address
 	
 	// The server can be assigned any port number in the range of [1024,6535]
@@ -67,7 +66,7 @@ int main(){
 	printf("Client says: %s \n",buffer);
 
 	// Clear the buffer
-	memset(buffer, 0, sizeof(buffer); 
+	memset(buffer, 0, sizeof(buffer));
 
 	// close the established connection between the client and the server
 
