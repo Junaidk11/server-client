@@ -74,7 +74,7 @@ int main(){
 	// Create a message buffer
 	// Note the format of message response sent by the http-serrver -> Header followed by Body
 	char message[9999];
-	strcpy(message, "HTTP/1.1 200 OK\nContent-length: 47\nContent-Type: text/html\n\n<html><body><h1>Http-server here!</h1></body></html>");
+	strcpy(message, "HTTP/1.1 200 OK\nContent-length: 47\nContent-Type: text/html\n\n<html><body><h1>Http-server here</h1></body></html>");
 
 	// 10: The following code will only execute if a client has requested to connect with the server created above.
 	// The connection made with a client is stored in a different place holder, which allows the server to listen to multiple client requests while processing the client at the head of the queue. 
@@ -91,16 +91,17 @@ int main(){
 	memset(buffer, 0, sizeof(buffer));
 
 	// 13: Send the message response to the client
-	int msg_len; // if the response sent successfully to the client (which is your browser), then write() api will return 0
+	int msg_len; 
 	msg_len = write(client, message,strlen(message));
 
+	// 14: If the response not sent successfully to the client (which is your browser), then write() api will return 0
 	if(msg_len==0){
 		printf("Client closed connection.\n");
 		close(client);
 		return -1;
 	}
 
-	// close the established connection between the client and the server
+	// 15: Close the established connection between the client and the server, the http-server response was sent successfully. 
 	close(client); 
 	printf("Client has disconnected. \n"); 
 
